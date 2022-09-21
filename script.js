@@ -1,18 +1,3 @@
-// GENERAL NOTES
-    // INITIALISATION
-    // - all vars to empty string
-    // - setup the number pad
-
-    // ON CLICK NUMBER
-    // 
-    // IF FIRST NUMBER (if currOperator empty)
-    //      write the new number in the previous result
-    // 
-    // ELSE
-    // 
-
-    // ON CLICK OPERATOR
-
 
 // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 // LINK TO HTML ELEMENTS
