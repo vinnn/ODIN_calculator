@@ -1,13 +1,24 @@
 // GENERAL NOTES
-    // - the current result is displayed (and stored) in the html element id='displayResult'. Each time it is needed (e.g. for operations), it is read in the html element
-    // - 
+    // INITIALISATION
+    // - all vars to empty string
+    // - setup the number pad
+
+    // ON CLICK NUMBER
+    // 
+    // IF FIRST NUMBER (if currOperator empty)
+    //      write the new number in the previous result
+    // 
+    // ELSE
+    // 
+
+    // ON CLICK OPERATOR
 
 
 // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 // LINK TO HTML ELEMENTS
 // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-const numberPad = document.getElementById('numberPad');
+const numberPad = document.querySelector('.numberPad');
 
 const prevCalc = document.getElementById('displayPreviousCalc');
 const currOperator = document.getElementById('displayCurrentOperator');
@@ -23,25 +34,21 @@ const currResult = document.getElementById('displayCurrentResult');
 // clear previous results
 clearResults()
 // setup the number pad
-setupNumberPad()
+// setupNumberPad()
 let number_btn = document.querySelectorAll(".btn-number");
 
-// initialize running variables
-let prevCalc_val = "";
-let currOperator_val = "";
-let currNumber_val = "";
-
-
+// %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 // event listeners - to be compacted later
+// %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 // click on number
 number_btn.forEach( (numb) => {        
     numb.addEventListener("click", function( event ) {
         let new_number = event.target.textContent;
 
-        // if initial number (ie no operator yet) then write the new number directly in the prevCalc variable,
+        // if this is the initial number (ie no operator yet) then write the new number directly in the prevCalc variable,
         if (currOperator.textContent == "") {
             prevCalc.textContent += new_number;
-            prevCalc_val = prevCalc.textContent;
+            let prevCalc_val = prevCalc.textContent;
             prevResult_val = prevCalc.textContent;
 
         // otherwise write in the current_number variable and update the current_result:
@@ -53,7 +60,6 @@ number_btn.forEach( (numb) => {
             currResult_val = operate(currOperator_val, prevResult_val, currNumber_val);
             currResult.textContent = currResult_val;
         }
-                
     })
 })
 
@@ -63,9 +69,15 @@ number_btn.forEach( (numb) => {
             oper.addEventListener("click", function( event ) {
 
             // First, send the previous number and operator in the previous calc field adding parentheses around (only from second operator):
-            if (currNumber_val !== "") {
-                prevCalc_val = "(" + prevCalc_val + ") " + currOperator_val + " " + currNumber_val;
-                prevCalc.textContent = prevCalc_val;
+            if (currNumber.textContent !== "") {
+                prevCalc_val = prevCalc.textContent;
+                if (prevCalc_val.indexOf(" ") < 0) {
+                    prevCalc_val = prevCalc_val + " " + currOperator_val + " " + currNumber_val;
+                    prevCalc.textContent = prevCalc_val;
+                } else {
+                    prevCalc_val = "(" + prevCalc_val + ") " + currOperator_val + " " + currNumber_val;
+                    prevCalc.textContent = prevCalc_val;
+                }
 
                 currNumber_val = "";
                 currNumber.textContent = currNumber_val;
@@ -82,6 +94,12 @@ number_btn.forEach( (numb) => {
 
 
 
+// click on "CLEAR" button
+let clear_btn = document.querySelector(".clear");
+clear_btn.addEventListener("click", function( event ) {
+    clearResults();
+
+});
 
 
 
@@ -93,7 +111,7 @@ number_btn.forEach( (numb) => {
         // SETUP NUMBER PAD
         // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
         function setupNumberPad() {
-            for (let i=1; i<=9; i++) {
+            for (let i=0; i<=9; i++) {
                 const numb = document.createElement('button');
                 numb.classList.add('btn-number');
                 numb.textContent = i;
@@ -113,66 +131,53 @@ number_btn.forEach( (numb) => {
         }
 
 // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-// RUN FUNCTIONS
+// FUNCTIONS
 // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-// %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-// OPERATORS
-// %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+        // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+        // OPERATORS
+        // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+        function add(num1, num2) {
+            return num1 + num2;
+        };
+        function subtract(num1, num2) {
+            return num1 - num2;
+        };
+        function multiply(num1, num2) {
+            return num1 * num2;
+        };
+        function divide(num1, num2) {
+            return num1 / num2;
+        };
 
-function add(num1, num2) {
-    return num1 + num2;
-};
-function subtract(num1, num2) {
-    return num1 - num2;
-};
-function multiply(num1, num2) {
-    return num1 * num2;
-};
-function divide(num1, num2) {
-    return num1 / num2;
-};
+        // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+        // OPERATE
+        // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+        function operate(operator, n1, n2) {
+            let num1 = Number(n1);
+            let num2 = Number(n2);
 
+            switch (operator) {
+                case "+":
+                    return add(num1, num2);
+                case "-":
+                    return subtract(num1, num2);
+                case "*":
+                    return multiply(num1, num2);
+                case "/":
+                    if (num2 == 0) {
+                        alert("division by zero not allowed.");
+                        clearResults();
+                        break;
+                    }
+                    return divide(num1, num2);
+            }
 
-// %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-// OPERATE
-// %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-function operate(operator, n1, n2) {
-    let num1 = Number(n1);
-    let num2 = Number(n2);
-
-    switch (operator) {
-        case "+":
-            return add(num1, num2);
-        case "-":
-            return subtract(num1, num2);
-        case "*":
-            return multiply(num1, num2);
-        case "/":
-            return divide(num1, num2);
-    }
-
-};
-
-
-
-
+        };
 
 
 
 
-
-// %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-// ON LOADING THE PAGE
-// %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-    // - setup the number pad
-    // - clear the displayed result 
-
-// window.onload = () => {
-//     setupNumberPad();
-//     clearResults()
-// }
 
 
 

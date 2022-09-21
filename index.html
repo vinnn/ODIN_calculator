@@ -6,39 +6,84 @@
   <link rel="stylesheet" href="style.css">
   <link rel="shortcut icon" href="favicon.ico">
 </head>
+
 <body>
 
   <div class="header">
     <h1>CALCULATOR</h1>
   </div>
 
-  <div id="resultBoard">
-    <!-- display current operation chain -->
-    <p>PREV CALC:</p>
-    <div id='displayPreviousCalc'>previous calc</div>
-    <!-- display current operator -->
-    <p>OPERATOR:</p>
-    <div id='displayCurrentOperator'>current operator</div>
-    <!-- display current number -->
-    <p>NUMBER:</p>
-    <div id='displayCurrentNumber'>current number</div>
-    <!-- display current result -->
-    <p>RESULT:</p>
-    <div id='displayCurrentResult'>current result</div>
+  <div class="calculationPlan">
+
+    <!-- ****************************** -->    
+    <!-- section with operation buttons -->
+    <!-- ****************************** -->
+    <div class="operationPlan">
+      <div class="numberPad">
+        <button class="btn-number">1</button>
+        <button class="btn-number">2</button>
+        <button class="btn-number">3</button>
+        <button class="btn-number">4</button>
+        <button class="btn-number">5</button>
+        <button class="btn-number">6</button>
+        <button class="btn-number">7</button>
+        <button class="btn-number">8</button>
+        <button class="btn-number">9</button>
+        <button class="btn-number zero">0</button>                
+      </div>
+    
+      <div class="operatorPad">
+        <button class="btn-operator">+</button>
+        <button class="btn-operator">-</button>
+        <button class="btn-operator">*</button>
+        <button class="btn-operator">/</button>
+        <button class="btn-operator clear">CLEAR</button>
+      </div>
+    </div>
+
+
+    <!-- ****************************** -->    
+    <!-- section with result fields     -->
+    <!-- ****************************** -->
+
+    <div class="resultPlan">
+
+ 
+
+      <!-- display previous calc -->
+      <!-- <div class="div-res"> -->
+        <div class="res-title">OPERAND 1:</div>
+        <div id='displayPreviousCalc'>previous calc</div>
+      <!-- </div> -->
+
+  
+
+
+
+      <!-- display current operator -->
+      <!-- <div class="div-res"> -->
+        <div class="res-title">OPERATOR:</div>
+        <div id='displayCurrentOperator'>current operator</div>
+      <!-- </div> -->
+      <!-- display current number -->
+      <!-- <div class="div-res"> -->
+        <div class="res-title">OPERAND 2:</div>
+        <div id='displayCurrentNumber'>current number</div>
+      <!-- </div> -->
+      <!-- display current result -->
+      <!-- <div class="div-res"> -->
+        <div class="res-title">RESULT:</div>
+        <div id='displayCurrentResult'>current result</div>
+      <!-- </div> -->
+
+    </div>
+
+
+
+
   </div>
 
-  <div id="numberPad">
-    <!-- buttons js-generated -->
-  </div>
 
-  <div id="operationBoard">
-    <button class="btn-operator" id="btn-add">+</button>
-    <button class="btn-operator" id="btn-subtract">-</button>
-    <button class="btn-operator" id="btn-multiply">*</button>
-    <button class="btn-operator" id="btn-divide">/</button>
-    <button class="btn-operator" id="btn-equal">=</button>
-    <button class="btn-operator" id="btn-clear">CLEAR</button>
-  </div>
 
 
 
